@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ұстазыма арналған арнау</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #ffb6b9, #fae3d9, #bbded6);
+            height: 100vh;
+            overflow-x: hidden;
+            color: #333;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .photo-frame {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 8px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,107,107,0.6);
+        }
+        
+        .message {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 30px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s;
+            text-align: left;
+            line-height: 1.8;
+        }
+        
+        .message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1 {
+            color: #ff6b6b;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .signature {
+            margin-top: 40px;
+            font-style: italic;
+            font-weight: bold;
+            text-align: right;
+        }
+        
+        .creator {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+        
+        .creator-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-left: 15px;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+        
+        .intro {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="photo-frame">
+            <img src="alma.png" alt="Ұстазымыз">
+        </div>
+        
+        <div class="intro">Құрметті ұстазымыздың туған күніне арналған арнау!</div>
+        
+        <button class="btn" id="openBtn">Поздравлениеді ашу</button>
+        
+        <div class="message" id="message">
+            <h1>Аяулы ұстазым!</h1>
+            <p>Туған күніңіз құтты болсын!</p>
+            <p>Сізге мықты денсаулық, сарқылмас шабыт, өміріңіздің әр күнінде шаттық пен тыныштық тілеймін!</p>
+            <p>Ұстаздық жолыңызда абыройыңыз артып, еңбегіңіздің жемісін көре беріңіз.</p>
+            <p>Сіздей жанға алғысын айтатын, риясыз ризашылығын білдіретін шәкірттер көп болсын!</p>
+            
+            <p>Сіздің әр сөзіңіз бен әр ісіңіз — бізге үлкен тәрбие, үлкен үлгі.</p>
+            <p>Сондықтан еңбегіңіз елеусіз қалмасын, әр күніңіз тек жақсылықпен өрілсін!</p>
+            
+            <p>Сізден тек білім ғана емес, өмірге деген көзқарас та үйреніп келеміз. Рахмет Сізге бәрі үшін!</p>
+            
+            <div class="signature">
+                <p>Ізгі тілектермен 11А сыныбы атынан</p>
+                <p>сүйікті оқушыңыз</p>
+            </div>
+            
+            <div class="creator">
+                <div>
+                    <p>ALISH AKADIL</p>
+                </div>
+                <img src="creator.png" alt="ALISH" class="creator-photo">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('openBtn').addEventListener('click', function() {
+            document.getElementById('message').classList.add('show');
+            this.style.display = 'none';
+            createHearts();
+        });
+        
+        function createHearts() {
+            const colors = ['#ff6b6b', '#ff8e8e', '#ffb6b9', '#ffb3ba', '#ffdfd3'];
+            
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heart.style.animationDelay = (Math.random() * 2) + 's';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+</html>
