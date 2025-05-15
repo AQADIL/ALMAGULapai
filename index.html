@@ -510,7 +510,7 @@
     </div>
     
     <audio id="bgMusic" loop>
-        <source src="happy.mp3" type="audio/mpeg">
+        <source src="happy.mp3" type="audio/mp3">
     </audio>
 
     <script>
@@ -595,7 +595,7 @@
                 bgMusic.play();
                 this.querySelector('.music-icon').textContent = '🔊';
             }
-            musicPlaying = true;
+            musicPlaying = !musicPlaying;
         });
         
         // Предзагрузка изображений
