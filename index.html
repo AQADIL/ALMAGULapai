@@ -506,7 +506,7 @@
     <div class="floating-hearts" id="hearts-container"></div>
     
     <div class="music-control" id="musicControl">
-        <div class="music-icon">🎵</div>
+        <div class="music-icon">🔊</div>
     </div>
     
     <audio id="bgMusic" loop>
@@ -522,6 +522,30 @@
         const bgMusic = document.getElementById('bgMusic');
         let musicPlaying = false;
         
+        // Попытка автовоспроизведения при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            bgMusic.volume = 0.5;
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    musicPlaying = true;
+                    musicControl.querySelector('.music-icon').textContent = '🔊';
+                })
+                .catch(error => {
+                    // Автовоспроизведение не сработало, ждем взаимодействия пользователя
+                    document.body.addEventListener('click', startAudioOnInteraction, { once: true });
+                });
+            }
+        });
+        
+        function startAudioOnInteraction() {
+            bgMusic.play().then(() => {
+                musicPlaying = true;
+                musicControl.querySelector('.music-icon').textContent = '🔊';
+            });
+        }
+        
         envelope.addEventListener('click', openEnvelope);
         
         function openEnvelope() {
@@ -535,13 +559,6 @@
             
             // Запускаем конфетти
             createConfetti(50);
-            
-            // Включаем музыку (автовоспроизведение заблокировано браузерами)
-            setTimeout(() => {
-                bgMusic.play().catch(e => console.log('Автовоспроизведение заблокировано'));
-                musicPlaying = true;
-                musicControl.querySelector('.music-icon').textContent = '🔊';
-            }, 1000);
         }
         
         // Создание летающих сердечек
@@ -587,10 +604,12 @@
         }
         
         // Управление музыкой
-        musicControl.addEventListener('click', function() {
+        musicControl.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
             if (musicPlaying) {
                 bgMusic.pause();
-                this.querySelector('.music-icon').textContent = '🎵';
+                this.querySelector('.music-icon').textContent = '🔇';
             } else {
                 bgMusic.play();
                 this.querySelector('.music-icon').textContent = '🔊';
