@@ -510,7 +510,7 @@
     </div>
     
     <audio id="bgMusic" loop>
-        <source src="happy.mp3" type="audio/mp3">
+        <source src="happy.mp3" type="audio/mpeg">
     </audio>
 
     <script>
@@ -587,16 +587,16 @@
         }
         
         // Управление музыкой
-       window.addEventListener('DOMContentLoaded', () => {
-          bgMusic.load(); // просто загрузка, без play
+        musicControl.addEventListener('click', function() {
+            if (musicPlaying) {
+                bgMusic.pause();
+                this.querySelector('.music-icon').textContent = '🎵';
+            } else {
+                bgMusic.play();
+                this.querySelector('.music-icon').textContent = '🔊';
+            }
+            musicPlaying = !musicPlaying;
         });
-
-        envelope.addEventListener('click', () => {
-            envelope.classList.add('open');
-            invitation.classList.add('visible');
-    
-            bgMusic.play().catch(err => console.error("Ошибка воспроизведения:", err));
-    });
         
         // Предзагрузка изображений
         window.onload = function() {
