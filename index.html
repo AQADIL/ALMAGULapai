@@ -453,6 +453,21 @@
                 height: 60px;
             }
         }
+        .copyright {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #777;
+    background-color: transparent; /* или #fff, или transparent, если не нужен фон */
+    padding: 10px 20px;
+    z-index: 999;
+    font-family: sans-serif;
+    border-top: 1px solid #eee;
+    width: max-content;
+}
+
     </style>
 </head>
 <body>
@@ -625,5 +640,9 @@
             });
         };
     </script>
+    <footer class="copyright">
+    &copy; 2025 | Сделано с любовью автором: <strong>ӘЛІШ АҚӘДІЛ</strong>
+</footer>
+
 </body>
 </html>
